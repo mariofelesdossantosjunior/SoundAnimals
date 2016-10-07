@@ -30,12 +30,22 @@ public class MainActivity extends AppCompatActivity {
         initButtons();
     }
 
+    /**
+     * Metodo responsavel por iniciar os botoes
+     * implementando os id
+     */
     private void initButtons(){
         for( int id : buttonsIds ){
             setOnClickListinner( id );
         }
     }
 
+
+    /**
+     * Metodo responsavel pela ação do click
+     * dos botoes de forma generica
+     * @param viewId R.id.???
+     */
     private void setOnClickListinner( int viewId ){
         findViewById( viewId ).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
+    /**
+     * Metodo responsavel pela Sound Player
+     * @param animal Nome Animal
+     */
     void playSoundAnimal(String animal) {
         MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

@@ -1,86 +1,72 @@
 package br.mario.soundanimals;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import java.io.IOException;
 
+/**
+ * @autor Mario feles dos Santos Junior
+ * @email mario_feles@live.com
+ * @since 07-10-2016
+ */
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    public static final String SERVER_SOUND = "http://mariofelesdossantosjunior.890m.com/sounds/";
 
-    @BindView(R.id.btCat)
-    Button btCat;
+    private int[] buttonsIds = {R.id.btCat};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-      /*  btCat = (Button) findViewById(R.id.btCat);
-        btCat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("mario","AQUI FUNCIONA");
-            }
-        });*/
-
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-
-            }
-        });*/
+        initButtons();
     }
 
-    @OnClick(R.id.btCat)
-    void clickBtCat(){
-        Log.i("mario","CLICK AQUI");
-        /*String url = "http://mariofelesdossantosjunior.890m.com/certificates/CAT.mp3";
+    private void initButtons(){
+        for( int id : buttonsIds ){
+            setOnClickListinner( id );
+        }
+    }
+
+    private void setOnClickListinner( int viewId ){
+        findViewById( viewId ).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.btCat:
+                        playSoundAnimal("gato");
+                        break;
+                }
+            }
+        });
+    }
+
+
+
+    void playSoundAnimal(String animal) {
         MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
+            mediaPlayer.setDataSource(SERVER_SOUND.concat(animal).concat(".mp3"));
+            mediaPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer player) {
+                player.start();
+            }
+        });
     }
 }
+

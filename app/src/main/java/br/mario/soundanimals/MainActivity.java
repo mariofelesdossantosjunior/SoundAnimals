@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     public static final String SERVER_SOUND = "http://mariofelesdossantosjunior.890m.com/sounds/";
 
+    //Arrays Ids
     private int[] buttonsIds = {R.id.btCat};
 
     @Override

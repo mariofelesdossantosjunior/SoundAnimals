@@ -6,14 +6,16 @@
     android:weightSum="1">
 
     <Button
-        android:text="Button"
+        android:text="Ouvir Som"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.14"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:padding="30dp"
-        android:id="@+id/btSound" />
+        android:id="@+id/btSound"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimaryDark" />
 
     <ImageView
         android:layout_width="match_parent"

@@ -1,10 +1,8 @@
 package br.mario.soundanimals.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.mario.soundanimals.R;
-import br.mario.soundanimals.fragments.GenericFragment;
+import br.mario.soundanimals.adapters.ViewPagerAdapter;
 import br.mario.soundanimals.model.Animal;
 
 /**
@@ -48,103 +46,31 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        //initButtons();
     }
 
     private void initListAnimals(){
-        animals.add(new Animal("gato",SERVER_SOUND+"gato.mp3",SERVER_IMAGE+"gato.jpg"));
-        animals.add(new Animal("cachorro",SERVER_SOUND+"cachorro.mp3",SERVER_IMAGE+"cachorro.jpg"));
+        animals.add(new Animal("gato",SERVER_SOUND+"gato.mp3",SERVER_IMAGE+"gato.png", Color.BLUE));
+        animals.add(new Animal("burro",SERVER_SOUND+"burro.mp3",SERVER_IMAGE+"burro.png",Color.GREEN));
+        animals.add(new Animal("cachorro",SERVER_SOUND+"cachorro.mp3",SERVER_IMAGE+"cachorro.png",Color.RED));
+        //animals.add(new Animal("cavalo",SERVER_SOUND+"cavalo.mp3",SERVER_IMAGE+"cavalo.png"));
+        animals.add(new Animal("elefante",SERVER_SOUND+"elefante.mp3",SERVER_IMAGE+"elefante.png",Color.DKGRAY));
+        animals.add(new Animal("galinha",SERVER_SOUND+"galinha.mp3",SERVER_IMAGE+"galinha.png",Color.YELLOW));
+        animals.add(new Animal("leao",SERVER_SOUND+"leao.mp3",SERVER_IMAGE+"leao.png",Color.MAGENTA));
+        animals.add(new Animal("macaco",SERVER_SOUND+"macaco.mp3",SERVER_IMAGE+"macaco.png",Color.YELLOW));
+        //animals.add(new Animal("ovelha",SERVER_SOUND+"ovelha.mp3",SERVER_IMAGE+"ovelha.png"));
+        //animals.add(new Animal("pato",SERVER_SOUND+"pato.mp3",SERVER_IMAGE+"pato.png"));
+        animals.add(new Animal("pintinho",SERVER_SOUND+"pintinho.mp3",SERVER_IMAGE+"pintinho.png",Color.GREEN));
+        animals.add(new Animal("porco",SERVER_SOUND+"porco.mp3",SERVER_IMAGE+"porco.png",Color.BLACK));
+        //animals.add(new Animal("sapo",SERVER_SOUND+"sapo.mp3",SERVER_IMAGE+"sapo.png"));
+        animals.add(new Animal("vaca",SERVER_SOUND+"vaca.mp3",SERVER_IMAGE+"vaca.png",Color.GRAY));
     }
 
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        for(Animal animal : animals){
-            adapter.addFragment(new GenericFragment(), animal.getNome());
-        }
-
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), animals);
         viewPager.setAdapter(adapter);
     }
 
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
-    /**
-     * Metodo responsavel por iniciar os botoes
-     * implementando os id
-     *//*
-    private void initButtons(){
-        for( int id : buttonsIds ){
-            setOnClickListinner( id );
-        }
-    }
-
-    *//**
-     * Metodo responsavel pela ação do click
-     * dos botoes de forma generica
-     * @param viewId R.id.???
-     *//*
-    private void setOnClickListinner( int viewId ){
-        findViewById( viewId ).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.btCat:
-                        playSoundAnimal("gato");
-                        break;
-                }
-            }
-        });
-    }
-
-    *//**
-     * Metodo responsavel pela Sound Player
-     * @param animal Nome Animal
-     *//*
-    void playSoundAnimal(String animal) {
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try {
-            mediaPlayer.setDataSource(SERVER_SOUND.concat(animal).concat(".mp3"));
-            mediaPlayer.prepareAsync();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer player) {
-                player.start();
-            }
-        });
-    }*/
 }
 

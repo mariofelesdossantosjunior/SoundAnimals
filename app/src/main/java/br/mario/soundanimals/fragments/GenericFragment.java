@@ -78,7 +78,6 @@ public class GenericFragment extends Fragment implements MediaPlayer{
         android.media.MediaPlayer mediaPlayer = new android.media.MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            Log.i(LOG_TAG,"URL: "+SERVER_SOUND.concat(nameSound).concat(".mp3"));
             mediaPlayer.setDataSource(SERVER_SOUND.concat(nameSound).concat(".mp3"));
             mediaPlayer.prepareAsync();
         } catch (IOException e) {

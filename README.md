@@ -1,4 +1,5 @@
 # SoundAnimals
 
-Sound of Animals
-Developer Mario Feles dos Santos Junior
+Project Sound of Animals
+is the application intended child with sound animals.
+Developer Mario Feles dos Santos Junior - BR
